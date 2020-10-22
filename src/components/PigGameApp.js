@@ -47,21 +47,21 @@ export default class PigGameApp extends React.Component {
                 dice: prevState.dice = Math.floor(Math.random() * 6) + 1
             }))
             if (this.state.dice !== 1) {
-                console.log("Dice " + this.state.dice)
+                ("Dice " + this.state.dice)
                 this.setState((prevState) => ({
                     roundScore: prevState.roundScore += this.state.dice
                 }))
 
-                console.log("RoundScore " + this.state.roundScore)
+                ("RoundScore " + this.state.roundScore)
             } else {
-                console.log('should go to next')
+                ('should go to next')
                 this.handleNextPlayer();
             }
 
             this.setState((prevState) => ({
                 diceRoll: prevState.diceRoll = this.state.dice
             }));
-            console.log("Dice Roll- " + this.state.diceRoll)
+            ("Dice Roll- " + this.state.diceRoll)
         }
 
 
@@ -70,7 +70,7 @@ export default class PigGameApp extends React.Component {
     handleHold = () => {
         if (this.state.gamePlaying) {
             this.state.scores[this.state.activePlayer] += this.state.roundScore
-            console.log(this.state.scores)
+            (this.state.scores)
 
             if (this.state.scores[this.state.activePlayer] >= 20) {
                 this.setState((prevState) => ({
