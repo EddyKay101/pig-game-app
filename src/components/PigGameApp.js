@@ -18,6 +18,20 @@ export default class PigGameApp extends React.Component {
         outcome: ""
     };
 
+    handleInit = () => {
+        this.setState((prevState) => ({
+            scores: prevState.scores = [0, 0],
+            activePlayer: prevState.activePlayer = 0,
+            roundScore: prevState.roundScore = 0,
+            gamePlaying: prevState.gamePlaying = true,
+            dice: prevState.dice = 0,
+            isActivePanel1: prevState.isActivePanel1 = true,
+            isActivePanel2: prevState.isActivePanel2 = false,
+            diceRoll: prevState.diceRoll = 0,
+            outcome: prevState.outcome = ""
+        }))
+    }
+
     // Function to handle what panel is active.
     handleNextPlayer = () => {
             if (this.state.activePlayer === 0) {
@@ -47,21 +61,19 @@ export default class PigGameApp extends React.Component {
                 dice: prevState.dice = Math.floor(Math.random() * 6) + 1
             }))
             if (this.state.dice !== 1) {
-                ("Dice " + this.state.dice)
+                
                 this.setState((prevState) => ({
                     roundScore: prevState.roundScore += this.state.dice
                 }))
 
-                ("RoundScore " + this.state.roundScore)
+                
             } else {
-                ('should go to next')
                 this.handleNextPlayer();
             }
 
             this.setState((prevState) => ({
                 diceRoll: prevState.diceRoll = this.state.dice
             }));
-            ("Dice Roll- " + this.state.diceRoll)
         }
 
 
@@ -69,9 +81,7 @@ export default class PigGameApp extends React.Component {
 
     handleHold = () => {
         if (this.state.gamePlaying) {
-            this.state.scores[this.state.activePlayer] += this.state.roundScore
-            (this.state.scores)
-
+            this.state.scores[this.state.activePlayer] += this.state.roundScore;
             if (this.state.scores[this.state.activePlayer] >= 20) {
                 this.setState((prevState) => ({
                     outcome: prevState.outcome = "Winner!",
@@ -87,7 +97,7 @@ export default class PigGameApp extends React.Component {
     }
 
     componentDidMount() {
-        this.setState((prevState) => ({
+        this.setState(() => ({
             isActivePanel1: true,
         }))
     }
@@ -112,7 +122,9 @@ export default class PigGameApp extends React.Component {
                         outcome={this.state.outcome}
                         gamePlaying={this.state.gamePlaying}
                     />
-                    <NewGame />
+                    <NewGame 
+                        handleInit={this.handleInit}
+                    />
 
                     <DiceImage
                         dice={this.state.dice}
